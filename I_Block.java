@@ -1,4 +1,15 @@
-package com.CS136L.Tetris;
+/*
+ * Created by Jasque Saydyk and Duxing Chen
+ * Lab 02 - Drawing Blocks
+ * CS 136L Section 3801
+ * 5 February, 2017
+ * Description - This class describes the I block in Tetris, with each square being 20 by 20 pixels.
+ * The I is composed of 4 squares vertical.
+ * The blockArray is used to store the different Rectangles needed to construct the shape
+ * The rotate methods redraw the shape to describe how it looks in those various positions
+ * The rotate methods rotate the shape counter clock-wise
+*/
+package com.CS136L.Tetris;  // Package is used by my IDE, remove if it's a problem
 
 import java.awt.Color;
 import java.awt.Rectangle;

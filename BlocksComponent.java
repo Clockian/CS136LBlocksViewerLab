@@ -1,8 +1,12 @@
-//Created by Jasque Saydyk
-//Package is used by my IDE, remove if it's a problem
-package com.CS136L.Tetris;
+/*
+ * Created by Jasque Saydyk and Duxing Chen
+ * Lab 02 - Drawing Blocks
+ * CS 136L Section 3801
+ * 5 February, 2017
+ * Description - This class dictates what is actually rendered in the scene
+*/
+package com.CS136L.Tetris;  // Package is used by my IDE, remove if it's a problem
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -11,17 +15,15 @@ import javax.swing.JComponent;
 
 public class BlocksComponent extends JComponent{
 
-	//This is to improve compatibility with older versions of this class
-	//You can ignore this, line exists to remove IDE warning
+	// This is to improve compatibility with older versions of this class
+	// You can ignore this, line exists to remove IDE warning
 	private static final long serialVersionUID = 1L;
 	
-	//Colors of the blocks
-	private Color oBlockColor = Color.YELLOW;
-	
 	protected void paintComponent(Graphics g){
+		// Casting(converting) Graphics to Graphics2D
 		Graphics2D g2 = (Graphics2D) g;
 		
-		//Creating all of the objects for snapshot with positions
+		// Creating all of the objects for snapshot with positions, then rotating if necessary
 		I_Block iblock1 = new I_Block(0, 25 * 20);
 		iblock1.rotate90();
 		I_Block iblock2 = new I_Block(8 * 20, 17 * 20);
@@ -44,11 +46,17 @@ public class BlocksComponent extends JComponent{
 		J_Block jblock2 = new J_Block(4 * 20, 20 * 20);
 		jblock2.rotate90();
 		
-		//Put all objects into array
+		// Put all objects into array
 		Tetromino[] bag = {iblock1, iblock2, sblock1, sblock2, oblock1, oblock2,
 				tblock1, tblock2, lblock1, lblock2, zblock1, zblock2, jblock1, jblock2};
 		
-		//For each object in bag, set the color then display it, using polymorphism
+		/*
+		 * For each object in bag, set the color then display it, using polymorphism
+		 * Specifically what it does is that, since each shape could only be made with 
+		 * the Rectangle class, I had each object store the Rectangles needed to create 
+		 * it in an array. BlockComponent then takes the array from the class, then displays 
+		 * each rectangle in the array.
+		*/
 		for(Tetromino block : bag){
 			g2.setColor(block.getColor());
 			Rectangle[] dimensions = block.getBlockArray();
