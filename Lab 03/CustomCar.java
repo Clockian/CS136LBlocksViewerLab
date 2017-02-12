@@ -57,6 +57,7 @@ public class CustomCar extends Car{
 	 * @param g2 the graphics context
 	 */
 	public void draw(Graphics2D g2){
+		// Objects for the body and wheels of car
 		Rectangle body = new Rectangle(x, y + 10, carLength, 10);
 		Ellipse2D.Double leftTire
 			= new Ellipse2D.Double(x + 10, y + 20, leftWheelSize, leftWheelSize);
@@ -72,10 +73,12 @@ public class CustomCar extends Car{
 		// The bottom of the rear windshield
 		Point2D.Double r4 = new Point2D.Double(x + (carLength - 10), y +10);
 		
+		// Lines forming the roof of the car
 		Line2D.Double frontWindshield = new Line2D.Double(r1, r2);
 		Line2D.Double roofTop = new Line2D.Double(r2, r3);
 		Line2D.Double rearWindshield = new Line2D.Double(r3, r4);
 		
+		// Draws the car
 		g2.setColor(carColor);
 		g2.fill(body);
 		g2.draw(frontWindshield);
