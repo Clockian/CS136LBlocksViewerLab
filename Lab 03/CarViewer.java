@@ -5,7 +5,7 @@
  * 10 February 2017
  * Description - This class is main, creating the window and displaying the panel
 */
-package com.CS136L.PaintingCars;
+package com.CS136L.PaintingCars;  // Package is used by my IDE, remove if it's a problem
 
 import java.awt.Color;
 import javax.swing.JFrame;

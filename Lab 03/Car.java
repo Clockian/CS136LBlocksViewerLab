@@ -6,7 +6,7 @@
  * Description - This class is a generic car, code originates from
  * Big Java 6th edition, Chapter 3, pg. 112, with slight edits
 */
-package com.CS136L.PaintingCars;
+package com.CS136L.PaintingCars;  // Package is used by my IDE, remove if it's a problem
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;

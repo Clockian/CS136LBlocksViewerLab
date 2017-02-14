@@ -7,7 +7,7 @@
  * filled with white paint. To change the color, you add paint
  * of different colors in different amounts called parts
 */
-package com.CS136L.PaintingCars;
+package com.CS136L.PaintingCars;  // Package is used by my IDE, remove if it's a problem
 
 import java.awt.Color;
 

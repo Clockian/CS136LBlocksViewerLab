@@ -7,7 +7,7 @@
  * but adding the ability to change the length, wheel size, and color
  * of the car
 */
-package com.CS136L.PaintingCars;
+package com.CS136L.PaintingCars;  // Package is used by my IDE, remove if it's a problem
 
 import java.awt.Color;
 import java.awt.Graphics2D;

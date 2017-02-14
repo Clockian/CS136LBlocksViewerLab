@@ -5,7 +5,7 @@
  * 10 February 2017
  * Description - This class creates the panel of cars to be shown
 */
-package com.CS136L.PaintingCars;
+package com.CS136L.PaintingCars;  // Package is used by my IDE, remove if it's a problem
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
