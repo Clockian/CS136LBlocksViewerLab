@@ -3,7 +3,7 @@
  * Lab 04 - RSA Encryption
  * CS 136L Section 3801
  * 14 February 2017
- * Description - This class generates 
+ * Description - This class allows you to encrypt and decrypt numbers with RSA
 */
 import java.math.BigInteger;
 import java.util.Random;
