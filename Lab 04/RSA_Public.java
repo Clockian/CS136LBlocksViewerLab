@@ -60,8 +60,6 @@ public class RSA_Public {
 		BigInteger lcmDenominator = primePSub.gcd(primeQSub);
 		BigInteger totient = lcmNumerator.divide(lcmDenominator);
 		
-		
-		
 		// 4. Compute the Public Key Exponent
 		// Test every number between 2 and the totient to see if it is coprime to the totient
 		// Therefore, the public key exponent should a prime that is NOT a divisor of the totient
@@ -70,7 +68,8 @@ public class RSA_Public {
 		int skip = 0;
 		for(int ii = 2; (BigInteger.valueOf(ii).compareTo(totient) <= 0); ii++)
 		{
-			if(BigInteger.valueOf(ii).isProbablePrime(100) && totient.mod(BigInteger.valueOf(ii)).compareTo(BigInteger.ZERO) != 0){
+			if(BigInteger.valueOf(ii).isProbablePrime(100) && 
+					totient.mod(BigInteger.valueOf(ii)).compareTo(BigInteger.ZERO) != 0){
 				if(skip == 2){
 					publicKeyExponent = BigInteger.valueOf(ii);
 					break;
@@ -78,7 +77,6 @@ public class RSA_Public {
 				else{
 					skip++;
 				}
-				
 			}
 		}
 		
