@@ -8,11 +8,14 @@
 */
 public class Sudoku {
 	
+	private char[][] sudokuPuzzle;
+	
+	
 	/**
 	 * Initializes an empty Sudoku puzzle
 	 */
 	public Sudoku(){
-		
+		sudokuPuzzle = new char[9][9];
 	}
 	
 	/**
@@ -21,7 +24,17 @@ public class Sudoku {
 	 * each row ending with a character return, blank spaces represented with a space 
 	 */
 	public Sudoku(String starting_configuration){
+		sudokuPuzzle = new char[9][9];
+		String delims = "[ \\/n]";
+		String[] tokens = starting_configuration.split(delims);
+		String row;
 		
+		for(int ii = 0; ii < 9; ii++){
+			row = tokens[ii];
+			for(int jj = 0; jj < 9; jj++){
+				sudokuPuzzle[ii][jj] = row.charAt(jj);
+			}
+		}
 	}
 	
 	/**
