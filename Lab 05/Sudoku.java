@@ -6,16 +6,18 @@
  * Description - This class creates backend of Sudoku game
  * Puzzle is to be 9x9 with sub squares of 3x3
 */
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class Sudoku {
 	
-	private char[][] sudokuPuzzle;
-	
+	private int[][] sudokuPuzzle;
 	
 	/**
 	 * Initializes an empty Sudoku puzzle
 	 */
 	public Sudoku(){
-		sudokuPuzzle = new char[9][9];
+		sudokuPuzzle = new int[9][9];
 	}
 	
 	/**
@@ -24,27 +26,29 @@ public class Sudoku {
 	 * each row ending with a character return, blank spaces represented with a space 
 	 */
 	public Sudoku(String starting_configuration){
-		sudokuPuzzle = new char[9][9];
-		String delims = "[ \\/n]";
-		String[] tokens = starting_configuration.split(delims);
+		sudokuPuzzle = new int[9][9];
+		String[] tokens = starting_configuration.split("\n");
 		String row;
-		
+		Character temp;
 		for(int ii = 0; ii < 9; ii++){
 			row = tokens[ii];
 			for(int jj = 0; jj < 9; jj++){
-				sudokuPuzzle[ii][jj] = row.charAt(jj);
+				temp = row.charAt(jj);
+				sudokuPuzzle[ii][jj] = Character.getNumericValue(temp);
 			}
 		}
 	}
 	
 	/**
-	 * Gives the digit in the requested square
+	 * Gives the digit in the requested squares, numbered from 0 to 8
 	 * @param row Row that digit exists in
 	 * @param col Column that digit exists in
 	 * @return char of digit in square
 	 */
 	public char getSquare(int row, int col){
-		return 0;
+		Integer tmp = sudokuPuzzle[row][col];
+		String tmp2 = tmp.toString();
+		return tmp2.charAt(0);
 	}
 	
 	/**
@@ -54,7 +58,7 @@ public class Sudoku {
 	 * @param value Digit to store at given location
 	 */
 	public void setSquare(int row, int col, char value){
-		
+		sudokuPuzzle[row][col] = (int)value;
 	}
 	
 	/**
@@ -66,7 +70,121 @@ public class Sudoku {
 	 * @return True if all the rules are properly observed
 	 */
 	public boolean isValid(){
-		return false;
+		for(int ii = 0; ii < 9; ii++){
+			// Creates an ArrayList of a row of sudokuPuzzle
+			ArrayList<Integer> listRow = new ArrayList<>();
+			for(int jj = 0; jj < 9; jj++){
+				listRow.add(sudokuPuzzle[ii][jj]);
+			}
+			
+			// Evaluates row if it's numbers are in range for 1-9
+			boolean inRangeRow = listRow.stream()
+					.filter(c -> c != -1)
+					.allMatch(c -> c >= 1 && c <= 9);
+			
+			// Evaluates row if it has any duplicates
+			boolean anyRepeatsRow = listRow.stream()
+					.filter(c -> c != -1)
+					.allMatch(new HashSet<>()::add);
+			
+			// Creates an ArrayList of a column of sudokuPuzzle
+			ArrayList<Integer> listCol = new ArrayList<>();
+			for(int jj = 0; jj < 9; jj++){
+				listCol.add(sudokuPuzzle[jj][ii]);
+			}
+			
+			// Evaluates column if it's numbers are in range for 1-9
+			boolean inRangeCol = listCol.stream()
+					.filter(c -> c != -1)
+					.allMatch(c -> c >= 1 && c <= 9);
+			
+			// Evaluates column if it has any duplicates
+			boolean anyRepeatsCol = listCol.stream()
+					.filter(c -> c != -1)
+					.allMatch(new HashSet<>()::add);
+			
+			// Creates an ArrayList of a square of sudokuPuzzle
+			ArrayList<Integer> listSquare = getSquare(ii);
+			
+			// Evaluates square if it's numbers are in range for 1-9
+			boolean inRangeSqr = listSquare.stream()
+					.filter(c -> c != -1)
+					.allMatch(c -> c >= 1 && c <= 9);
+			
+			// Evaluates square if it has any duplicates
+			boolean anyRepeatsSqr = listSquare.stream()
+					.filter(c -> c != -1)
+					.allMatch(new HashSet<>()::add);
+			
+			// Evaluate if valid or not
+			if(inRangeRow == false || anyRepeatsRow == false ||
+			   inRangeCol == false || anyRepeatsCol == false ||
+			   inRangeSqr == false || anyRepeatsSqr == false) return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * This gets a unique 3x3 quadrent of the sudoku puzzle
+	 * @param quadrent numbered from 0 to 8 from left to right, top to bottom
+	 * @return an ArrayList of the numbers in the 3 by 3 quadrent
+	 */
+	private ArrayList<Integer> getSquare(int quadrent){
+		ArrayList<Integer> square = new ArrayList<>();
+		int row = -1;
+		int col = -1;
+		int endRow = -1;
+		int endCol = -1;
+		
+		switch(quadrent){
+		case 0: 
+			row = 0; endRow = 3;
+			col = 0; endCol = 3;
+			break;
+		case 1: 
+			row = 0; endRow = 3;
+			col = 3; endCol = 6;
+			break;
+		case 2: 
+			row = 0; endRow = 3;
+			col = 6; endCol = 9;
+			break;
+		case 3: 
+			row = 3; endRow = 6;
+			col = 0; endCol = 3;
+			break;
+		case 4: 
+			row = 3; endRow = 6;
+			col = 3; endCol = 6;
+			break;
+		case 5: 
+			row = 3; endRow = 6;
+			col = 6; endCol = 9;
+			break;
+		case 6: 
+			row = 6; endRow = 9;
+			col = 0; endCol = 3;
+			break;
+		case 7: 
+			row = 6; endRow = 9;
+			col = 3; endCol = 6;
+			break;
+		case 8: 
+			row = 6; endRow = 9;
+			col = 6; endCol = 9;
+			break;
+		default: 
+			System.out.println("ERROR: getSquare()");
+			break;
+		}
+		
+		for(int ii = row; ii < endRow; ii++){
+			for(int jj = col; jj < endCol; jj++){
+				square.add(sudokuPuzzle[ii][jj]);
+			}
+		}
+		
+		return square;
 	}
 	
 	/**
