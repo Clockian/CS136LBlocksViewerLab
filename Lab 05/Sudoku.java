@@ -47,8 +47,7 @@ public class Sudoku {
 	 */
 	public char getSquare(int row, int col){
 		Integer tmp = sudokuPuzzle[row][col];
-		String tmp2 = tmp.toString();
-		return tmp2.charAt(0);
+		return tmp.toString().charAt(0);
 	}
 	
 	/**
@@ -58,7 +57,7 @@ public class Sudoku {
 	 * @param value Digit to store at given location
 	 */
 	public void setSquare(int row, int col, char value){
-		sudokuPuzzle[row][col] = (int)value;
+		sudokuPuzzle[row][col] = Character.getNumericValue(value);
 	}
 	
 	/**
@@ -192,6 +191,16 @@ public class Sudoku {
 	 * @return True if there are no blank spaces and is valid
 	 */
 	public boolean isSolved(){
-		return false;
+		boolean valid = isValid();
+		for(int ii = 0; ii < 9; ii++){
+			// Creates an ArrayList of a row of sudokuPuzzle
+			ArrayList<Integer> listRow = new ArrayList<>();
+			for(int jj = 0; jj < 9; jj++){
+				listRow.add(sudokuPuzzle[ii][jj]);
+			}
+			boolean inRangeRow = listRow.stream().allMatch(c->c!=-1);
+			if(valid == false || inRangeRow == false) return false;
+		}
+		return true;
 	}
 }
