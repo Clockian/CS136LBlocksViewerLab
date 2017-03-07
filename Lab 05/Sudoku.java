@@ -27,9 +27,14 @@ public class Sudoku {
 	 */
 	public Sudoku(String starting_configuration){
 		sudokuPuzzle = new int[9][9];
+		
+		// Split the string into 9 char long String segments, then put into array, 
+		// representing the rows of a table
 		String[] tokens = starting_configuration.split("\n");
 		String row;
 		Character temp;
+		
+		// Takes a row, then grabs each char from it and converts it to a number. Spaces are -1
 		for(int ii = 0; ii < 9; ii++){
 			row = tokens[ii];
 			for(int jj = 0; jj < 9; jj++){
@@ -47,7 +52,14 @@ public class Sudoku {
 	 */
 	public char getSquare(int row, int col){
 		Integer tmp = sudokuPuzzle[row][col];
-		return tmp.toString().charAt(0);
+		
+		// Spaces are -1, requires special conversion, or else you return dashes
+		if(tmp == -1){
+			return ' ';
+		}
+		else{
+			return tmp.toString().charAt(0);
+		}
 	}
 	
 	/**
@@ -130,11 +142,15 @@ public class Sudoku {
 	 */
 	private ArrayList<Integer> getSquare(int quadrent){
 		ArrayList<Integer> square = new ArrayList<>();
+		
+		// Initialize to be -1 to generate error if something goes wrong
 		int row = -1;
 		int col = -1;
 		int endRow = -1;
 		int endCol = -1;
 		
+		// Row and Col identify the top left index of square,
+		// endRow and endCol identify bottom right index of square
 		switch(quadrent){
 		case 0: 
 			row = 0; endRow = 3;
@@ -177,6 +193,7 @@ public class Sudoku {
 			break;
 		}
 		
+		// Insert all units of the square in the array into the ArrayList
 		for(int ii = row; ii < endRow; ii++){
 			for(int jj = col; jj < endCol; jj++){
 				square.add(sudokuPuzzle[ii][jj]);
@@ -192,13 +209,20 @@ public class Sudoku {
 	 */
 	public boolean isSolved(){
 		boolean valid = isValid();
+		
+		// Goes through all the rows of the table
 		for(int ii = 0; ii < 9; ii++){
+			
 			// Creates an ArrayList of a row of sudokuPuzzle
 			ArrayList<Integer> listRow = new ArrayList<>();
 			for(int jj = 0; jj < 9; jj++){
 				listRow.add(sudokuPuzzle[ii][jj]);
 			}
+			
+			// Evaluates column if it's numbers are equal to -1
 			boolean inRangeRow = listRow.stream().allMatch(c->c!=-1);
+			
+			// Evaluates if it is solved or not
 			if(valid == false || inRangeRow == false) return false;
 		}
 		return true;
