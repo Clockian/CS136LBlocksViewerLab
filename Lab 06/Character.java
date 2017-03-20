@@ -1,13 +1,37 @@
 
 public abstract class Character {
-	private int healthPoints;
-	private String damageType;
 	
-	public Damage fight(Character[] enemies){
-		return null;
+	protected String name;
+	protected int healthPoints;
+	protected String damageType;
+	protected boolean alive;
+	
+	public Character(){
+		alive = true;
 	}
 	
-	public void damageRecieved(Damage damage){
-		
+	public String getName(){
+		return this.name;
 	}
+	
+	public int getHealthPoints(){
+		return this.healthPoints;
+	}
+	
+	public void setHealthPoints(int health){
+		healthPoints = health;
+		if(healthPoints <= 0){
+			alive = false;
+		}
+	}
+	
+	public boolean getAlive(){
+		return this.alive;
+	}
+	
+	public abstract Damage fight(Character[] enemies);
+	
+	public abstract void damageRecieved(Damage damage);
+	
+	public abstract String toString();
 }
