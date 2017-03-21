@@ -10,14 +10,26 @@ public class Warrior extends Character{
 		this.damageType = "SLASH";
 	}
 	
+	//inputted array includes self
 	@Override
-	public Damage fight(Character[] enemies) {
-		Character highestHPFoe = enemies[0];
+	public Damage fight(Character[] contestants) {
+		Character highestHPFoe;
+		if(!this.getName().equals(contestants[0].getName())){
+			highestHPFoe = contestants[0];
+		}
+		else{
+			highestHPFoe = contestants[1];
+		}
+				
 		// Find foe with largest HP
-		if(enemies.length < 1){
-			for(Character foe : enemies){
-				if(highestHPFoe.getHealthPoints() < foe.getHealthPoints()){
-					highestHPFoe = foe;
+		if(contestants.length < 1){
+			for(Character foe : contestants){
+				// if self, don't fight, skip if tree and move onto next foe
+				if(this.getName().equals(foe.getName())){
+					// else, if foe is bigger than current, get foe
+					if(highestHPFoe.getHealthPoints() < foe.getHealthPoints()){
+						highestHPFoe = foe;
+					}
 				}
 			}
 		}
@@ -31,12 +43,13 @@ public class Warrior extends Character{
 	@Override
 	public void damageRecieved(Damage damage) {
 		Random rand = new Random();
-		if(damage.getDamageType() == "SLASH" || damage.getDamageType() == "SMASH" && rand.nextInt(4) == 0){
+		int dodgeChance = rand.nextInt(4);
+		if((damage.getDamageType() == "SLASH" || damage.getDamageType() == "SMASH") && dodgeChance == 0){
 			System.out.println(this.name + " dodged the attack, no damage taken");
 		}
 		else{
 			System.out.println(this.name + " gets " + damage.getDamageType() + " recieving " + damage.getDamageAmount());
-			this.setHealthPoints(damage.getDamageAmount());
+			this.setHealthPoints(this.getHealthPoints() - damage.getDamageAmount());
 		}
 	}
 
