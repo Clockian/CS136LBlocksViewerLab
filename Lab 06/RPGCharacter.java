@@ -1,4 +1,10 @@
-
+/*
+ * Created by Jasque Saydyk and Niki Shirey
+ * Lab 06 - RPG
+ * CS 136L Section 3801
+ * 21 March 2017
+ * Description - This class creates abstract RPGCharacter
+*/
 public abstract class RPGCharacter {
 	
 	protected String name;
@@ -30,9 +36,35 @@ public abstract class RPGCharacter {
 		return this.alive;
 	}
 	
-	public abstract Damage fight(RPGCharacter[] enemies);
+	/**
+	 * Method to fight other enemies
+	 * @param enemies
+	 * @param numberOfPlayers
+	 * @return
+	 */
+	public abstract Damage fight(RPGCharacter[] enemies, int numberOfPlayers);
 	
+	/**
+	 * To handle being damaged
+	 * @param damage
+	 */
 	public abstract void damageReceived(Damage damage);
 	
-	public abstract String toString();
+	/**
+	 * Any special actions when this is killed
+	 * @param damage
+	 * @return
+	 */
+	public abstract Damage whenKilled(Damage damage);
+	
+	public String toString(){
+		String status = (this.name + " the ");
+		if(this.getAlive() == true){
+			status += (this.rpgClass + ", Health: " + this.getHealthPoints());
+		}
+		else{
+			status += ("dead");
+		}
+		return status;
+	}
 }

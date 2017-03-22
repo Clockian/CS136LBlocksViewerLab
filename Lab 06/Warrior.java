@@ -1,3 +1,10 @@
+/*
+ * Created by Jasque Saydyk and Niki Shirey
+ * Lab 06 - RPG
+ * CS 136L Section 3801
+ * 21 March 2017
+ * Description - This class creates a Warrior that is a RPGCharacter
+*/
 import java.util.Random;
 
 public class Warrior extends RPGCharacter{
@@ -13,7 +20,7 @@ public class Warrior extends RPGCharacter{
 	
 	//inputted array includes self
 	@Override
-	public Damage fight(RPGCharacter[] contestants) {
+	public Damage fight(RPGCharacter[] contestants, int numberOfPlayers) {
 		RPGCharacter highestHPFoe;
 		if(!this.getName().equals(contestants[0].getName())){
 			highestHPFoe = contestants[0];
@@ -23,7 +30,7 @@ public class Warrior extends RPGCharacter{
 		}
 				
 		// Find foe with largest HP
-		for(int ii = 0; ii < contestants.length; ii++){
+		for(int ii = 0; ii < numberOfPlayers; ii++){
 			// if self, don't fight, skip if tree and move onto next foe
 			if(!this.getName().equals(contestants[ii].getName())){
 				// else, if foe is bigger than current, get for
@@ -34,7 +41,7 @@ public class Warrior extends RPGCharacter{
 		}
 		Random rand = new Random();
 		int slash = rand.nextInt(7) + 10;
-		Damage damage = new Damage(highestHPFoe.getName(), this.damageType, slash);
+		Damage damage = new Damage(this.name, highestHPFoe.getName(), this.damageType, slash);
 		System.out.println(this.getName() + " " + this.damageType + " " + highestHPFoe.getName() + " for " + slash + " damage");
 		return damage;
 	}
@@ -47,20 +54,13 @@ public class Warrior extends RPGCharacter{
 			System.out.println(this.name + " dodged the attack, no damage taken");
 		}
 		else{
-			System.out.println(this.name + " gets " + damage.getDamageType() + " recieving " + damage.getDamageAmount());
+			System.out.println(this.name + " gets " + damage.getDamageType() + " receiving " + damage.getDamageAmount());
 			this.setHealthPoints(this.getHealthPoints() - damage.getDamageAmount());
 		}
 	}
 
 	@Override
-	public String toString() {
-		String status = (this.name + " the ");
-		if(this.getAlive() == true){
-			status += (this.rpgClass + ", Health: " + this.getHealthPoints());
-		}
-		else{
-			status += ("dead");
-		}
-		return status;
+	public Damage whenKilled(Damage damage) {
+		return null;
 	}
 }
