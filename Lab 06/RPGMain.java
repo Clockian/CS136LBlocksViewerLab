@@ -1,10 +1,10 @@
 
 public class RPGMain {
 	public static void main(String[] args){
-		Warrior bob = new Warrior("bob");
-		Warrior john = new Warrior("john");
-		Warrior shawn = new Warrior("shawn");
-		Warrior pat = new Warrior("pat");
+		Warrior bob = new Warrior("Bob");
+		Warrior john = new Warrior("John");
+		Warrior shawn = new Warrior("Shawn");
+		Warrior pat = new Warrior("Pat");
 		
 		Arena arena = new Arena(4);
 		
@@ -15,19 +15,24 @@ public class RPGMain {
 		
 		int turn = 0;
 		
-		while(arena.getCurrentSize() != 1){
+		while(arena.getCurrentSize() > 1){
 			arena.printStatus();
 			System.out.println();
 			arena.takeTurn(turn);
+			
+			
 			System.out.println();
+			arena.removeDead();
+			System.out.println();
+			arena.determineWinner();
+			
 			if(turn < arena.getCurrentSize() - 1){
 				turn++;
 			}
 			else{
 				turn = 0;
 			}
-			System.out.println();
-			arena.removeDead();
+			System.out.println("----------------------");
 		}
 	}
 }

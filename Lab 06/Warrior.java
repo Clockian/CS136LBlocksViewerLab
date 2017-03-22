@@ -1,10 +1,11 @@
 import java.util.Random;
 
-public class Warrior extends Character{
+public class Warrior extends RPGCharacter{
 
 	public Warrior(String name){
 		super();
 		this.name = name;
+		this.rpgClass = "Warrior";
 		Random rand = new Random();
 		this.healthPoints = rand.nextInt(21) + 20;
 		this.damageType = "SLASH";
@@ -12,8 +13,8 @@ public class Warrior extends Character{
 	
 	//inputted array includes self
 	@Override
-	public Damage fight(Character[] contestants) {
-		Character highestHPFoe;
+	public Damage fight(RPGCharacter[] contestants) {
+		RPGCharacter highestHPFoe;
 		if(!this.getName().equals(contestants[0].getName())){
 			highestHPFoe = contestants[0];
 		}
@@ -22,14 +23,12 @@ public class Warrior extends Character{
 		}
 				
 		// Find foe with largest HP
-		if(contestants.length < 1){
-			for(Character foe : contestants){
-				// if self, don't fight, skip if tree and move onto next foe
-				if(this.getName().equals(foe.getName())){
-					// else, if foe is bigger than current, get foe
-					if(highestHPFoe.getHealthPoints() < foe.getHealthPoints()){
-						highestHPFoe = foe;
-					}
+		for(int ii = 0; ii < contestants.length; ii++){
+			// if self, don't fight, skip if tree and move onto next foe
+			if(!this.getName().equals(contestants[ii].getName())){
+				// else, if foe is bigger than current, get for
+				if(highestHPFoe.getHealthPoints() < contestants[ii].getHealthPoints()){
+					highestHPFoe = contestants[ii];
 				}
 			}
 		}
@@ -41,7 +40,7 @@ public class Warrior extends Character{
 	}
 
 	@Override
-	public void damageRecieved(Damage damage) {
+	public void damageReceived(Damage damage) {
 		Random rand = new Random();
 		int dodgeChance = rand.nextInt(4);
 		if((damage.getDamageType() == "SLASH" || damage.getDamageType() == "SMASH") && dodgeChance == 0){
@@ -55,9 +54,9 @@ public class Warrior extends Character{
 
 	@Override
 	public String toString() {
-		String status = (this.name + " is currently ");
+		String status = (this.name + " the ");
 		if(this.getAlive() == true){
-			status += ("alive, Health: " + this.getHealthPoints());
+			status += (this.rpgClass + ", Health: " + this.getHealthPoints());
 		}
 		else{
 			status += ("dead");
