@@ -9,6 +9,10 @@ import java.util.Random;
 
 public class Berserker extends RPGCharacter{
 
+	/**
+	 * Default constructor for a Berserker
+	 * @param name - The unique name for the Berserker
+	 */
 	public Berserker(String name){
 		super();
 		this.name = name;
@@ -17,15 +21,36 @@ public class Berserker extends RPGCharacter{
 		this.damageType = "SMASH";
 	}
 	
+	/**
+	 * Attacks a contestant with a smash attack randomly, can hit self
+	 * @param contestants - Players who are currently in the arena
+	 * @param numberOfPlayers - The number of players who are currently alive
+	 */
 	@Override
-	public Damage fight(RPGCharacter[] enemies, int numberOfPlayers) {
+	public void fight(RPGCharacter[] contestants, int numberOfPlayers) {
 		Random rand = new Random();
-		RPGCharacter foe = enemies[rand.nextInt(numberOfPlayers)];
+		RPGCharacter foe = contestants[rand.nextInt(numberOfPlayers)];
 		System.out.println(this.getName() + " " + this.damageType + " " + foe.getName() + " for " + 20 + " damage");
 		Damage damage = new Damage(this.name, foe.name, this.damageType, 20);
-		return damage;
+		
+		// Find opponent and deal damage
+		for(int ii = 0; ii < numberOfPlayers; ii++){
+			if(damage.getAttackCharacterName().equals(contestants[ii].getName())){
+				contestants[ii].damageReceived(damage);
+				
+				// If receiving player dies, he does his final move
+				Damage retaliate = contestants[ii].whenKilled(damage);
+				if(retaliate != null){
+					this.damageReceived(retaliate);
+				}
+			}
+		}
 	}
 
+	/**
+	 * To handle what happens when character receives damage
+	 * @param damage - The damage the character takes
+	 */
 	@Override
 	public void damageReceived(Damage damage) {
 		int hit;
@@ -42,10 +67,5 @@ public class Berserker extends RPGCharacter{
 			this.setHealthPoints(this.getHealthPoints() - hit);
 		}
 		System.out.println(this.name + " gets " + damage.getDamageType() + " receiving " + hit);
-	}
-
-	@Override
-	public Damage whenKilled(Damage damage) {
-		return null;
 	}
 }

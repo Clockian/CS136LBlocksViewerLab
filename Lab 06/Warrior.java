@@ -9,6 +9,10 @@ import java.util.Random;
 
 public class Warrior extends RPGCharacter{
 
+	/**
+	 * Default constructor for a Warrior
+	 * @param name - The unique name for the Warrior
+	 */
 	public Warrior(String name){
 		super();
 		this.name = name;
@@ -18,9 +22,45 @@ public class Warrior extends RPGCharacter{
 		this.damageType = "SLASH";
 	}
 	
-	//inputted array includes self
+	
+	/**
+	 * Attacks a contestants with a slash, can't hit self
+	 * @param contestants - Players who are currently in the arena
+	 * @param numberOfPlayers - The number of players who are currently alive
+	 */
 	@Override
-	public Damage fight(RPGCharacter[] contestants, int numberOfPlayers) {
+	public void fight(RPGCharacter[] contestants, int numberOfPlayers) {
+		// Find character with highest HP
+		RPGCharacter highestHPFoe = this.findHighestHP(contestants, numberOfPlayers);
+		
+		// Create and print attack
+		Random rand = new Random();
+		int slash = rand.nextInt(7) + 10;
+		Damage damage = new Damage(this.name, highestHPFoe.getName(), this.damageType, slash);
+		System.out.println(this.getName() + " " + this.damageType + " " + highestHPFoe.getName() + " for " + slash + " damage");
+		
+		// Find opponent and deal damage
+		for(int ii = 0; ii < numberOfPlayers; ii++){
+			if(damage.getAttackCharacterName().equals(contestants[ii].getName())){
+				contestants[ii].damageReceived(damage);
+				
+				// If receiving player dies, he does his final move
+				Damage retaliate = contestants[ii].whenKilled(damage);
+				if(retaliate != null){
+					this.damageReceived(retaliate);
+				}
+			}
+		}
+	}
+	
+	
+	/**
+	 * Finds the character with the largest HP in list that is not self
+	 * @param contestants - Players who are currently in the arena
+	 * @param numberOfPlayers - The number of players who are currently alive
+	 * @return The RPGCharacter with the largest HP that is not self
+	 */
+	private RPGCharacter findHighestHP(RPGCharacter[] contestants, int numberOfPlayers){
 		RPGCharacter highestHPFoe;
 		if(!this.getName().equals(contestants[0].getName())){
 			highestHPFoe = contestants[0];
@@ -39,13 +79,14 @@ public class Warrior extends RPGCharacter{
 				}
 			}
 		}
-		Random rand = new Random();
-		int slash = rand.nextInt(7) + 10;
-		Damage damage = new Damage(this.name, highestHPFoe.getName(), this.damageType, slash);
-		System.out.println(this.getName() + " " + this.damageType + " " + highestHPFoe.getName() + " for " + slash + " damage");
-		return damage;
+		return highestHPFoe;
 	}
 
+	
+	/**
+	 * To handle what happens when character receives damage, can dodge the attack
+	 * @param damage - The damage the character takes
+	 */
 	@Override
 	public void damageReceived(Damage damage) {
 		Random rand = new Random();
@@ -57,10 +98,5 @@ public class Warrior extends RPGCharacter{
 			System.out.println(this.name + " gets " + damage.getDamageType() + " receiving " + damage.getDamageAmount());
 			this.setHealthPoints(this.getHealthPoints() - damage.getDamageAmount());
 		}
-	}
-
-	@Override
-	public Damage whenKilled(Damage damage) {
-		return null;
 	}
 }

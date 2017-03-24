@@ -26,23 +26,35 @@ public class RPGMain {
 		int turn = 0;
 		
 		// Game loop
-		while(arena.getCurrentSize() > 1){
+		while(arena.getCurrentPlayerCount() > 1){
+			// Print current state of contestants
 			arena.printStatus();
 			System.out.println();
+			
+			// Have a contestant fight
 			arena.takeTurn(turn);
-			
-			
 			System.out.println();
-			arena.removeDead();
+			
+			// Remove any dead people from the arena
+			int deadRemoved = arena.removeDead(turn);
 			System.out.println();
+			
+			// Check if there is a winner
 			arena.determineWinner();
 			
-			if(turn < arena.getCurrentSize() - 1){
+			// Remove dead from turn counter
+			if(deadRemoved > 0){
+				turn = turn - deadRemoved;
+			}
+			
+			// Advance turn counter to next player
+			if(turn < arena.getCurrentPlayerCount() - 1){
 				turn++;
 			}
 			else{
 				turn = 0;
 			}
+			
 			System.out.println("----------------------");
 		}
 	}
