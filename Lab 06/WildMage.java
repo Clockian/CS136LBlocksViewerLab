@@ -31,12 +31,13 @@ public class WildMage extends RPGCharacter{
 	@Override
 	public void fight(RPGCharacter[] contestants, int numberOfPlayers) {
 		Random rand = new Random();
+		System.out.println(this.getName() + " FIRE at everyone");
 		
 		for(int ii = 0; ii < numberOfPlayers; ii++){
 			int hit = rand.nextInt(7);
 			Damage damage = new Damage(this.name, contestants[ii].getName(), this.damageType, hit);
 			contestants[ii].damageReceived(damage);
-			System.out.println(this.getName() + " FIRE " + contestants[ii].getName() + " for " + hit + "damage");
+			
 			// If receiving player dies, he does his final move
 			Damage retaliate = contestants[ii].whenKilled(damage);
 			if(retaliate != null){
