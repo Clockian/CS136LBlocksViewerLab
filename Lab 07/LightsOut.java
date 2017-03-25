@@ -36,10 +36,15 @@ public class LightsOut {
 	 * currently lit
 	 * @param row - The row index
 	 * @param col - The column index
-	 * @return 
+	 * @return The current state of that position on the board, false if out of bounds of array
 	 */
 	public boolean isLit(int row, int col){
-		return board[row][col];
+		try{
+			return board[row][col];
+		}
+		catch(ArrayIndexOutOfBoundsException e){
+			return false;
+		}
 	}
 	
 	
@@ -48,7 +53,7 @@ public class LightsOut {
 	 * at the given location.
 	 * @param row - The row index
 	 * @param col - The column index
-	 * @param value - The boolean value to change flip value to
+	 * @param value - The boolean value to change flip value to, nothing if out of bounds of array
 	 */
 	public void forceLit(int row, int col, boolean value){
 		try{
@@ -67,20 +72,16 @@ public class LightsOut {
 	 * @param col - The column index
 	 */
 	public void press(int row, int col){
-		boolean initialState = board[row][col];
-		if(initialState == true){ 
-			forceLit(row, col, false);
-			forceLit(row + 1, col, false);
-			forceLit(row - 1, col, false);
-			forceLit(row, col + 1, false);
-			forceLit(row, col - 1, false);
-		}
-		else{
-			forceLit(row, col, false);
-			forceLit(row + 1, col, false);
-			forceLit(row - 1, col, false);
-			forceLit(row, col + 1, false);
-			forceLit(row, col - 1, false);
+		int[] rows = {row, row + 1, row -1, row, row};
+		int[] cols = {col, col, col, col + 1, col -1};
+		
+		for(int ii = 0; ii < 5; ii++){
+			if(this.isLit(rows[ii], cols[ii]) == true){
+				forceLit(rows[ii], cols[ii], false);
+			}
+			else{
+				forceLit(rows[ii], cols[ii], true);
+			}
 		}
 	}
 }

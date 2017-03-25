@@ -10,6 +10,14 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class LightsOutFileLoader {
+	
+	/**
+	 * This loads a file and fills an array for the game to use
+	 * @param game - LightsOut class that dictates behavior
+	 * @param inputfile - File containing the initial state of the Lights Out board
+	 * @throws FileNotFoundException - If there is no file to be used
+	 * @throws UnsupportedLightsOutFileException - If the file has characters other than 'X' or '_'
+	 */
 	public void load(LightsOut game, File inputfile) throws FileNotFoundException, UnsupportedLightsOutFileException{
 		Scanner scan = new Scanner(inputfile);
 		String line = scan.nextLine();
