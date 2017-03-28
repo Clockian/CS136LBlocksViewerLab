@@ -41,8 +41,16 @@ public class Sudoku {
 			row = tokens[ii];
 			for(int jj = 0; jj < 9; jj++){
 				temp = row.charAt(jj);
-				sudokuPuzzle[ii][jj] = Character.getNumericValue(temp);
+				if(Character.isLetter(temp)){
+					throw new IllegalArgumentException();
+				}
+				else{
+					sudokuPuzzle[ii][jj] = Character.getNumericValue(temp);
+				}
 			}
+		}
+		if(this.isValid() == false){
+			throw new IllegalArgumentException();
 		}
 	}
 	
@@ -71,7 +79,12 @@ public class Sudoku {
 	 * @param value Digit to store at given location
 	 */
 	public void setSquare(int row, int col, char value){
-		sudokuPuzzle[row][col] = Character.getNumericValue(value);
+		if(Character.isLetter(value)){
+			throw new IllegalArgumentException();
+		}
+		else{
+			sudokuPuzzle[row][col] = Character.getNumericValue(value);
+		}
 	}
 	
 	/**

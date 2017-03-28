@@ -23,7 +23,7 @@ public class Test {
 		
 		Sudoku test = new Sudoku(start);
 		
-		String start2 = "";
+		/*String start2 = "";
 		start2 += "222222222\n";
 		start2 += "222222222\n";
 		start2 += "222222222\n";
@@ -34,7 +34,7 @@ public class Test {
 		start2 += "222222222\n";
 		start2 += "222222222\n";
 		
-		Sudoku test2 = new Sudoku(start2);
+		Sudoku test2 = new Sudoku(start2);*/
 		
 		String start3 = "";
 		start3 += "435269781\n";
@@ -61,8 +61,10 @@ public class Test {
 		System.out.println("Testing SetSquare 0,8");
 		test.setSquare(0, 8, '9');
 		
+		
 		System.out.println("\nTesting Get Square in 9th column on first row");
 		System.out.println(test.getSquare(0, 8));
+		
 		
 		System.out.println("\nTesting isValid()");
 		System.out.println(test.isValid());
@@ -73,7 +75,7 @@ public class Test {
 		System.out.println();
 		
 		// Testing test2
-		for(int x = 0; x < 9; x++){
+		/*for(int x = 0; x < 9; x++){
 			for(int y = 0; y < 9; y++){
 				System.out.print(test2.getSquare(x, y));
 				System.out.print("|");
@@ -92,7 +94,7 @@ public class Test {
 		System.out.println(test2.isValid());
 		
 		System.out.println("\nTesting isSolved()");
-		System.out.println(test2.isSolved());
+		System.out.println(test2.isSolved());*/
 		
 		// Testing test3
 		for(int x = 0; x < 9; x++){
@@ -105,6 +107,7 @@ public class Test {
 		
 		System.out.println("\nTesting Get Square in 9th column on first row");
 		System.out.println(test3.getSquare(0, 8));
+		System.out.println(test3.getSquare(3, 4));
 		
 		System.out.println("\nTesting isValid()");
 		System.out.println(test3.isValid());
