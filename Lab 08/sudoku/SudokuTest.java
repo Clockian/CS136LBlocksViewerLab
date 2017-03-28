@@ -26,7 +26,7 @@ public class SudokuTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void instantiateIllegalArgumentException(){
 		String start = "";
-		start += "2   6 2 1\n";
+		start += "2   6   1\n";
 		start += "68  7  9 \n";
 		start += "19   45  \n";
 		start += "82 1   4 \n";
