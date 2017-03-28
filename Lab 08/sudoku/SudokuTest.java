@@ -113,28 +113,37 @@ public class SudokuTest {
 	}
 	
 	// isValid should return false if there are any repeated numbers in a row
-	private boolean isValidRow(Sudoku puzzle){
-		return puzzle.isValid();
+	@Test
+	public void isValidRow(){
+		Sudoku puzzle = setUpFullSudoku();
+		puzzle.setSquare(0, 8, '4');
+		Assert.assertEquals(false, puzzle.isValid());
 	}
 	
 	// isValid should return false if there are any repeated numbers in a column
-	private boolean isValidColumn(Sudoku puzzle){
-		return puzzle.isValid();
+	@Test
+	public void isValidColumn(){
+		Sudoku puzzle = setUpFullSudoku();
+		puzzle.setSquare(8, 0, '4');
+		Assert.assertEquals(false, puzzle.isValid());
 	}
 	
 	// isValid should return false if there are any repeated numbers in any of
 	// the nine 3x3 subsquares
-	private boolean isValidSquare(Sudoku puzzle){
-		return puzzle.isValid();
+	@Test
+	public void isValidSquare(){
+		Sudoku puzzle = setUpFullSudoku();
+		puzzle.setSquare(1, 1, '4');
+		Assert.assertEquals(false, puzzle.isValid());
 	}
 	
 	// isValid should return true if no earlier rules are violated
 	@Test
 	public void isValidTest(){
 		Sudoku puzzle = setUpFullSudoku();
-		Assert.assertEquals(true, isValidRow(puzzle));
-		Assert.assertEquals(true, isValidColumn(puzzle));
-		Assert.assertEquals(true, isValidSquare(puzzle));
+		Assert.assertEquals(true, puzzle.isValid());
+		Assert.assertEquals(true, puzzle.isValid());
+		Assert.assertEquals(true, puzzle.isValid());
 	}
 	
 	// isSolved should return false if there are any blank spaces
