@@ -3,16 +3,18 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<T> extends AbstractSequentialList<T> implements List<T>{
 
 	private Node<T> firstNode;
 	private Node<T> lastNode;
 	
-	private class Node<T>{
-		private Node<T> next;
-		private Node<T> previous;
-		private T value;
+	private class Node<E>{
+		public Node<E> next;
+		public Node<E> previous;
+		public E data;
 		
 		
 		public Node(){
@@ -20,18 +22,77 @@ public class DoublyLinkedList<T> extends AbstractSequentialList<T> implements Li
 		}
 	}
 	
-	private class DLLIterator<T>{
+	private class DLLIterator<E> implements ListIterator<E>{
+		private Node<E> inext;
+		private Node<E> iprev;
+		private Node<E> returned;
+		private int index;
+		private int imodcount;
+		
+		@Override
+		public void add(E arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean hasPrevious() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public E next() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public int nextIndex() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public E previous() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public int previousIndex() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public void remove() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void set(E arg0) {
+			// TODO Auto-generated method stub
+			
+		}
 		
 	}
 	
 	@Override
-	public boolean add(Object arg0) {
+	public boolean add(T arg0) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void add(int arg0, Object arg1) {
+	public void add(int arg0, T arg1) {
 		// TODO Auto-generated method stub
 		
 	}
