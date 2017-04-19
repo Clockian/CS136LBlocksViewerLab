@@ -1,3 +1,12 @@
+/*
+ * Created by Jasque Saydyk and Caley Halpern
+ * Lab 09 - Doubly Linked List
+ * CS 136L
+ * 18 April 2017
+ * Description - This class is an ad hoc testing environment for the
+ * DoublyLinkedList class. Performs some tests the JUnit testing 
+ * environment fails to test, but is generally ugly and off the cuff.
+*/
 import java.util.ListIterator;
 
 public class Main_test {

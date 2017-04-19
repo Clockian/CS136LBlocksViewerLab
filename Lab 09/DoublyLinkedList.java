@@ -1,15 +1,14 @@
+/*
+ * Created by Jasque Saydyk and Caley Halpern
+ * Lab 09 - Doubly Linked List
+ * CS 136L
+ * 18 April 2017
+ * Description - This class creates a doubly linked list
+*/
 import java.util.AbstractSequentialList;
 import java.util.List;
 import java.util.ListIterator;
 
-/*
- * Created by Jasque Saydyk and Caley Halpern
- * Project 02 - Linked Lists, Stacks, and Queues
- * CS 249
- * 19 March 2017
- * Description - This class creates a doubly linked list that all classes
- * use to complete the project
-*/
 public class DoublyLinkedList<T> extends AbstractSequentialList<T> implements List<T>{//  {
 	
 	private INode<T> head;

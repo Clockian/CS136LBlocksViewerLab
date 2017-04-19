@@ -1,10 +1,17 @@
+/*
+ * Created by Jasque Saydyk and Caley Halpern
+ * Lab 09 - Doubly Linked List
+ * CS 136L
+ * 18 April 2017
+ * Description - This class performs a JUnit test on the DoublyLinkedList class
+ * incomplete and doesn't fulfill all requirements
+*/
 import java.util.ListIterator;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DoublyLinkedListTestEdited {
+public class DoublyLinkedListTest {
     DoublyLinkedList<Integer> test;
 
     @Before
