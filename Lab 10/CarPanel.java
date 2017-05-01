@@ -5,15 +5,14 @@
  * 30 April 2017
  * Description - This class creates the panel of cars to be shown
 */
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Random;
 import javax.swing.JPanel;
 
-
-public class CarComponent extends JPanel{
+public class CarPanel extends JPanel{
 	
 	// Used for version control
 	private static final long serialVersionUID = 1L;
@@ -52,15 +51,9 @@ public class CarComponent extends JPanel{
 	 * @param leftWheelSize the diameter of the left wheel
 	 * @param rightWheelSize the diameter of the right wheel
 	 */
-	public void addCar(int x, int y, int carLength, int leftWheelSize, int rightWheelSize){
-		// Create a random color to paint car, because project never specifies what should be done,
-		// other than that it should work with the code
-		Random rand = new Random();
-		PaintBucket bucket = new PaintBucket();
-		bucket.addColor(rand.nextInt(10), rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
-		
+	public void addCar(int x, int y, int carLength, int leftWheelSize, int rightWheelSize, Color carColor){
 		// Creates the car, then adds it to the list
-		CustomCar car = new CustomCar(x, y, carLength, leftWheelSize, rightWheelSize, bucket.getColor());
+		CustomCar car = new CustomCar(x, y, carLength, leftWheelSize, rightWheelSize, carColor);
 		carsToDraw.add(car);
 	}
 	
