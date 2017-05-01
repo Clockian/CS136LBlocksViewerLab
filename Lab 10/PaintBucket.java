@@ -1,8 +1,8 @@
 /*
- * Created by Jasque Saydyk and Tyler Smith
- * Lab 03 - Painting Cars
+ * Created by Jasque Saydyk and Austin Collins
+ * Lab 10 - ControlPanel
  * CS 136L Section 3801
- * 11 February 2017
+ * 30 April 2017
  * Description - This class creates a paint bucket, initially
  * filled with white paint. To change the color, you add paint
  * of different colors in different amounts called parts

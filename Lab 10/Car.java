@@ -1,8 +1,8 @@
 /*
- * Created by Jasque Saydyk and Tyler Smith
- * Lab 03 - Painting Cars
+ * Created by Jasque Saydyk and Austin Collins
+ * Lab 10 - ControlPanel
  * CS 136L Section 3801
- * 10 February 2017
+ * 30 April 2017
  * Description - This class is a generic car, code originates from
  * Big Java 6th edition, Chapter 3, pg. 112, with slight edits
 */
